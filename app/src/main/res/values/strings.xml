@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CareLess</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome_note">New Text</string>
+    <string name="pln_trp">New Trip</string>
+    <string name="pln_trp_btn_hnt">Click to plan your trip...</string>
+    <string name="frm_lbl_str">From:</string>
+    <string name="to_lbl_str">To:</string>
+    <string name="frm_entry_fld_hnt">From...</string>
+    <string name="to_entry_fld_hnt">To...</string>
+    <string name="date_lbl_str">Date:</string>
+    <string name="date_entry_fld_hnt">Trip start date...</string>
+    <string name="old_trips">Old Trips</string>
+    <string name="lst_trp_btn">Last Trip</string>
+
+
+</resources>

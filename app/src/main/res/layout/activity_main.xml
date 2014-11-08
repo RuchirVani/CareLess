@@ -1,0 +1,135 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:id="@+id/cr_ls_main_vw"
+    android:background="#EDEDED"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/frm_lbl_str"
+        android:id="@+id/frm_lbl"
+        android:textColor="#ff0b12ff"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:labelFor="@+id/frm_entry_fld"
+        android:paddingRight="10dp"/>
+
+    <AutoCompleteTextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/frm_entry_fld"
+        android:layout_alignBottom="@+id/frm_lbl"
+        android:layout_toEndOf="@+id/frm_lbl"
+        android:inputType="textAutoComplete"
+        android:hint="@string/frm_entry_fld_hnt"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/to_lbl_str"
+        android:id="@+id/to_lbl"
+        android:textColor="#ff0b12ff"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:layout_toStartOf="@+id/frm_entry_fld"
+        android:labelFor="@+id/frm_entry_fld"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/frm_lbl" />
+
+    <AutoCompleteTextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/to_entry_fld"
+        android:layout_toEndOf="@+id/to_lbl"
+        android:inputType="textAutoComplete"
+        android:hint="@string/to_entry_fld_hnt"
+        android:layout_alignTop="@+id/to_lbl"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pln_trp"
+        android:id="@+id/new_trp_btn"
+        android:layout_above="@+id/lst_trip_btn"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/date_lbl_str"
+        android:id="@+id/date_lbl"
+        android:textColor="#ff0b12ff"
+        android:paddingTop="10dp"
+        android:layout_toStartOf="@+id/frm_entry_fld"
+        android:labelFor="@+id/frm_entry_fld"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/to_entry_fld"
+        android:layout_alignStart="@+id/to_lbl"
+        android:paddingLeft="9dp" />
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_entry_fld"
+        android:layout_toEndOf="@+id/to_lbl"
+        android:hint="@string/date_entry_fld_hnt"
+        android:layout_below="@+id/to_entry_fld"
+        android:layout_alignEnd="@+id/to_entry_fld"
+        android:inputType="date"
+        android:editable="false"
+        android:clickable="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lst_trp_btn"
+        android:id="@+id/lst_trip_btn"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/frm_lst_trp"
+        android:textColor="#f38c8bff"
+        android:layout_toEndOf="@+id/date_lbl"
+        android:layout_below="@+id/lst_trip_btn"
+        android:layout_marginTop="40dp"
+        android:layout_alignStart="@+id/date_lbl"
+        android:layout_alignEnd="@+id/new_trp_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/to_lst_trip"
+        android:textColor="#de8c8bff"
+        android:layout_below="@+id/frm_lst_trp"
+        android:layout_alignStart="@+id/frm_lst_trp"
+        android:layout_alignEnd="@+id/lst_trip_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/date_lst_trip"
+        android:textColor="#de8c8bff"
+        android:layout_toEndOf="@+id/lst_trip_btn"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/to_lst_trip"
+        android:layout_alignEnd="@+id/to_lst_trip"
+        android:layout_alignStart="@+id/to_lst_trip" />
+
+
+</RelativeLayout>
