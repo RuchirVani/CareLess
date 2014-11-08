@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Iterator;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -21,6 +22,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.text.InputType;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +34,7 @@ import com.toinfinityandbeyond.pankaj.careless.dbhelper.DBHelper;
 import com.toinfinityandbeyond.pankaj.careless.dbmodel.CareLessTrip;
 
 
-public class MainActivity extends Activity implements OnClickListener
+public class CareLessNewTrip extends Activity implements OnClickListener
 {
     private EditText trpDate;
     private AutoCompleteTextView actfrm;
@@ -46,11 +48,14 @@ public class MainActivity extends Activity implements OnClickListener
     DBHelper db;
     private DatePickerDialog trpDateDatePickerDlg;
     private SimpleDateFormat dateFormatter;
+    private  static  String frm;
+    private  static  String to;
+    private  static  String dt;
     private static final String LOG_TAG = "CareLess";
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-    private static final String OUT_JSON = "/json";
-    private static final String API_KEY = "AIzaSyDUpa0rYb82qgjAYJ2l3nJz1F2qxgyWLKw";
+    private static final String PLACES_API_BASE = "http://api.sandbox.amadeus.com/v1.2/airports";
+    private static final String TYPE_AUTOCOMPLETE = "/autocomplete?";
+    //private static final String OUT_JSON = "/json";
+    private static final String API_KEY = "9FVBpJDSBogQAEIi1PVrHn8AX1cznZMm";
 
 
     @Override
@@ -80,10 +85,9 @@ public class MainActivity extends Activity implements OnClickListener
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
         try {
-            StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
-            sb.append("?key=" + API_KEY);
-            sb.append("&types=(cities)");
-            sb.append("&input=" + URLEncoder.encode(input, "utf8"));
+            StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE);
+            sb.append("apikey=" + API_KEY);
+            sb.append("&term=" + URLEncoder.encode(input, "utf8"));
 
             URL url = new URL(sb.toString());
             conn = (HttpURLConnection) url.openConnection();
@@ -107,16 +111,20 @@ public class MainActivity extends Activity implements OnClickListener
             }
         }
 
-        try {
+        try
+        {
+
             // Create a JSON object hierarchy from the results
-            JSONObject jsonObj = new JSONObject(jsonResults.toString());
-            JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
+            JSONArray jsnArray = new JSONArray(jsonResults.toString());
+            //JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
 
             // Extract the Place descriptions from the results
-            resultList = new ArrayList<String>(predsJsonArray.length());
-            for (int i = 0; i < predsJsonArray.length(); i++) {
-                resultList.add(predsJsonArray.getJSONObject(i).getString("description"));
+            resultList = new ArrayList<String>(jsnArray.length());
+            for (int i = 0; i < jsnArray.length(); i++) {
+                JSONObject jsnObj = jsnArray.getJSONObject(i);
+                resultList.add(jsnObj.getString("label"));
             }
+
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Cannot process JSON results", e);
         }
@@ -227,10 +235,12 @@ public class MainActivity extends Activity implements OnClickListener
             trpDateDatePickerDlg.show();
         else if (view.getId() == R.id.new_trp_btn)
         {
-            String frm = this.actfrm.getEditableText().toString();
-            String to = this.actto.getEditableText().toString();
-            String dt = this.trpDate.getEditableText().toString();
+            frm = this.actfrm.getEditableText().toString();
+            to = this.actto.getEditableText().toString();
+            dt = this.trpDate.getEditableText().toString();
             CareLessTrip trp = new CareLessTrip(frm,to,dt);
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(newTrpBtn.getWindowToken(),0);
             lstTripId = db.insertTrip(trp);
             Log.i("TRIP_ID","ID"+lstTripId);
         }
