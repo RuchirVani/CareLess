@@ -15,6 +15,11 @@
     <string name="date_entry_fld_hnt">Trip start date...</string>
     <string name="old_trips">Old Trips</string>
     <string name="lst_trp_btn">Last Trip</string>
+    <string name="flght_lbl_str">Flight :</string>
+    <string name="dept_tm_str">Dpt.Time :</string>
+    <string name="arrv_lbl_str">Arr.Time :</string>
+    <string name="prc_lbl_str"> $ :</string>
+    <string name="arrow_str"><![CDATA[---->]]></string>
 
 
 </resources>

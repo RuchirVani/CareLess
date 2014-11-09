@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
+import android.content.Intent;
 import android.text.InputType;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
@@ -48,8 +49,8 @@ public class CareLessNewTrip extends Activity implements OnClickListener
     DBHelper db;
     private DatePickerDialog trpDateDatePickerDlg;
     private SimpleDateFormat dateFormatter;
-    private  static  String frm;
-    private  static  String to;
+    public   static  String frm;
+    public   static  String to;
     private  static  String dt;
     private static final String LOG_TAG = "CareLess";
     private static final String PLACES_API_BASE = "http://api.sandbox.amadeus.com/v1.2/airports";
@@ -241,7 +242,14 @@ public class CareLessNewTrip extends Activity implements OnClickListener
             CareLessTrip trp = new CareLessTrip(frm,to,dt);
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(newTrpBtn.getWindowToken(),0);
-            lstTripId = db.insertTrip(trp);
+            //lstTripId = db.insertTrip(trp);
+
+            Intent intent=new Intent(this,CareLessArlnList.class);
+
+            intent.putExtra("from",frm);
+            intent.putExtra("to",to);
+            intent.putExtra("date",dt);
+            startActivity(intent);
             Log.i("TRIP_ID","ID"+lstTripId);
         }
         else if (view.getId() == R.id.lst_trip_btn)
@@ -254,11 +262,11 @@ public class CareLessNewTrip extends Activity implements OnClickListener
         }
     }
 
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
+    /*public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
     {
         String str = (String) adapterView.getItemAtPosition(position);
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
